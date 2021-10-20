@@ -1,0 +1,181 @@
+---
+title: "ADS Project 1 Modelling"
+output: html_notebook
+---
+
+```{r}
+library(testthat)
+suppressPackageStartupMessages(library(assertive))
+library(scales)
+library(dataPreparation)
+library(speedglm)
+library("performance")
+library(cvms)
+library(broom)
+library(tibble)
+library(faraway)
+library(arrow)
+library(feather)
+```
+
+```{r}
+data <- arrow::read_feather('/Users/greysonchung/Documents/mast30034_2021_s2_project_1-greysonchung/preprocessed_data/sample.feather')
+
+data$day_type <- factor(data$day_type)
+data$passenger_count <- factor(data$passenger_count)
+data$RatecodeID <- factor(data$RatecodeID)
+data$weekday <- factor(data$weekday)
+data$time <- factor(data$time)
+data$time_desc <- factor(data$time_desc)
+data$season <- factor(data$season)
+data$airport_trip <- factor(data$airport_trip)
+data$PUborough <- factor(data$PUborough)
+data$DOborough <- factor(data$DOborough)
+```
+
+```{r}
+mean(data$tip_amount)
+```
+
+
+```{r}
+col <- c('passenger_count', 'trip_distance', 'duration', 'fare_amount', 'tolls_amount', 'tip_amount', 'season', 'RatecodeID', 'time', 'day_type', 'PUborough', 'DOborough')
+
+train_index <- sample(1:nrow(data), 0.8*nrow(data))
+train <- data[train_index, col]
+valid <- data[-train_index, col]
+```
+
+```{r}
+hist(data$tip_amount)
+mean(data$tip_amount)
+```
+
+
+```{r}
+control_col <- c('trip_distance', 'duration', 'fare_amount', 'tolls_amount')
+scales <- build_scales(data_set=train, cols=control_col, verbose=TRUE)
+```
+
+```{r}
+train <- fast_scale(data_set = train, scales=scales, verbose=TRUE)
+```
+
+```{r}
+valid <- fast_scale(data_set = valid, scales=scales, verbose=TRUE)
+```
+
+```{r}
+baseline <- lm(tip_amount~1, data=train)
+summary(baseline)
+```
+## Calculate baseline model RMSE
+```{r}
+train_pred <- predict(baseline, train)
+train_df <- data.frame(cbind(actual=train$tip_amount, prediction=train_pred, (train$tip_amount-(train_pred))^2))
+
+train_rmse <- sqrt(mean(train_df[,3]))
+train_rmse
+```
+
+```{r}
+valid_pred <- predict(baseline, valid)
+valid_df <- data.frame(cbind(actual=valid$tip_amount, prediction=valid_pred, (valid$tip_amount-(valid_pred))^2))
+
+valid_rmse <- sqrt(mean(valid_df[,3]))
+valid_rmse
+```
+
+```{r}
+model <- lm(tip_amount~., data=train)
+summary(model)
+```
+
+```{r}
+train_pred <- predict(model, train)
+train_df <- data.frame(cbind(actual=train$tip_amount, prediction=train_pred, (train$tip_amount-(train_pred))^2))
+
+(train_rmse <- sqrt(mean(train_df[,3])))
+```
+
+
+```{r}
+valid_pred <- predict(model, valid)
+valid_df <- data.frame(cbind(actual=valid$tip_amount, prediction=valid_pred, (valid$tip_amount-(valid_pred))^2))
+
+(valid_rmse <- sqrt(mean(valid_df[,3])))
+```
+## Stepwise selection to remove attributes
+```{r}
+drop1(model, scope=~., test="F")
+```
+
+```{r}
+summary(model2)
+```
+
+```{r}
+plot(model2)
+```
+
+## Calculate RMSE
+```{r}
+train_pred <- predict(model2, train)
+train_df <- data.frame(cbind(actual=train$tip_amount, prediction=train_pred, (train$tip_amount-(train_pred))^2))
+
+(train_rmse <- sqrt(mean(train_df[,3])))
+```
+
+```{r}
+valid_pred <- predict(model2, valid)
+valid_df <- data.frame(cbind(actual=valid$tip_amount, prediction=valid_pred, (valid$tip_amount-(valid_pred))^2))
+
+(valid_rmse <- sqrt(mean(valid_df[,3])))
+```
+## calulcate R2
+```{r}
+rss <- sum((train_pred - train$tip_amount) ^ 2)
+tss <- sum((train$tip_amount - mean(train$tip_amount)) ^ 2)
+(rsq <- 1 - rss/tss)
+```
+```{r}
+rss <- sum((valid_pred - valid$tip_amount) ^ 2)
+tss <- sum((valid$tip_amount - mean(valid$tip_amount)) ^ 2)
+(rsq <- 1 - rss/tss)
+```
+
+## Gamma Distribution
+```{r}
+gmodel <- glm(tip_amount~., data=train, family=Gamma(link="log"))
+summary(gmodel)
+```
+
+```{r}
+gmodel2 <- step(gmodel)
+```
+
+```{r}
+plot(gmodel2)
+```
+## Calculate RMSE
+```{r}
+train_pred <- predict(gmodel2, train)
+train_df <- data.frame(cbind(actual=train$tip_amount, prediction=train_pred, (train$tip_amount-(train_pred))^2))
+
+(train_rmse <- sqrt(mean(train_df[,3])))
+```
+
+```{r}
+valid_pred <- predict(gmodel2, valid)
+valid_df <- data.frame(cbind(actual=valid$tip_amount, prediction=valid_pred, (valid$tip_amount-(valid_pred))^2))
+
+(valid_rmse <- sqrt(mean(valid_df[,3])))
+```
+
+```{r}
+r2(model2)
+```
+
+
+
+
