@@ -1,8 +1,5 @@
-# MAST30034 Project 1
-- Student Name: Haonan Zhong
-- Student ID: 867492
-- Due Date: Monday 16th of August 11:59:00 am (AEST).
-- Report Link: https://www.overleaf.com/read/zfqfjgfrxdnh
+ # Exporatory Analysis of New York City Taxi
+ * <img src="https://iconape.com/wp-content/files/ik/11613/png/medium.png" width="15" height="15"/><a href="https://medium.com/@haonanzhong/new-york-city-taxi-data-analysis-286e08b174a1"> Medium Story</a>
 
 
  # Dependencies
