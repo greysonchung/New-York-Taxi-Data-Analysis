@@ -8,9 +8,9 @@
  - Python Packages / Libraries: pandas, geopandas, numpy, matplotlib, seaborn, scipy, sklearn, statsmodels, contextily
 
  ## Datasets
- - NYC TLC (Jan, Feb, Jul, Aug of 2018): https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page
- - NYC Taxi Zone Shapefile: https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page
- - NYC Central Park Weather Record (2018): https://www.ncdc.noaa.gov/cdo-web/datasets/GHCND/stations/GHCND:USW00094728/detail
+ - [NYC TLC Dataset (Jan, Feb, Jul, Aug of 2018)](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
+ - [NYC Taxi Zone Shapefile](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
+ - [NYC Central Park Weather Record (2018)](https://www.ncdc.noaa.gov/cdo-web/datasets/GHCND/stations/GHCND:USW00094728/detail)
  - To download NYC TLC datasets please locate `download.ipynb` included in `code`, Taxi Zone Shapefile and weather dataset has been included in `raw_data`.
 
  ## Directory
