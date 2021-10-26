@@ -1,5 +1,9 @@
-# Required Python Packages/Library:
-pandas, geopandas, numpy, matplotlib, seaborn, scipy, sklearn, statsmodels, contextily
-
-# To Install contextily:
-pip install contextily
+pandas
+geopandas
+numpy
+matplotlib
+seaborn
+scipy
+sklearn
+statsmodels
+contextily
