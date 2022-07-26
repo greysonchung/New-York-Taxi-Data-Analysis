@@ -1,4 +1,4 @@
- # Exporatory Analysis of New York City Taxi
+ # MAST30034 Exporatory Analysis of New York City Taxi
  * <img src="https://iconape.com/wp-content/files/ik/11613/png/medium.png" width="15" height="15"/><a href="https://medium.com/@haonanzhong/new-york-city-taxi-data-analysis-286e08b174a1"> Medium Story</a>
  * <img src="https://iconape.com/wp-content/files/ro/51720/png/dropbox-paper.png" width="15" height="15"/><a href="https://github.com/greysonchung/New-York-Taxi-Data-Analysis/blob/main/Project%201%20Report.pdf"> Project Report</a>
 
