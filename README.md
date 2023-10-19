@@ -1,8 +1,9 @@
  # MAST30034 Exporatory Analysis of New York City Taxi
+
+As one of the most populous cities in the United States, New York City witnesses millions of taxi trips every month. This project aims to conduct a quantitative analysis of the New York City Taxi and Limousine Commission (TLC) trip record data to gain a better understanding of it. Additionally, we aim to provide recommendations that might improve taxi drivers' income.
+
  * <img src="https://iconape.com/wp-content/files/ik/11613/png/medium.png" width="15" height="15"/><a href="https://medium.com/@haonanzhong/new-york-city-taxi-data-analysis-286e08b174a1"> Medium Story</a>
  * <img src="https://iconape.com/wp-content/files/ro/51720/png/dropbox-paper.png" width="15" height="15"/><a href="https://github.com/greysonchung/New-York-Taxi-Data-Analysis/blob/main/Project%201%20Report.pdf"> Project Report</a>
-
-`Note: This is just the copy of the original project repository, the original project repository is kept private and is available upon request.`
 
  ## Dependencies
  - <img src="https://iconape.com/wp-content/files/zt/11663/png/python.png" width="15" height="15"/> Language: Python 3.8.8
